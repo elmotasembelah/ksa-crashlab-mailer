@@ -1,5 +1,5 @@
 const {
-  transporter,
+  createTransporter,
   defaultMailOptions,
   generateMailOptions,
 } = require("../lib/nodemailer.js");
@@ -8,6 +8,14 @@ const { sendEmail } = require("../lib/sendEmail.js");
 const sendEmailUsingGmail = async (req, res) => {
   const contactInfo = req.body;
   console.log(contactInfo);
+
+  const transporter = createTransporter()
+  if(transporter === 0) {
+    res.status(400).json({
+      message: "transporter was not created successfully",
+    });
+    return ;
+  }
 
   const mailOptions = generateMailOptions(contactInfo);
 

@@ -26,11 +26,7 @@ app.get("/", (req, res) => {
   res.send("connected");
 });
 
-app.post("/sendEmail", async (req, res) => {
-  await sendEmailUsingGmail(req, res);
-
-  // res.send("email sent");
-});
+app.post("/sendEmail", sendEmailUsingGmail)
 
 app.use((req, res) => res.status(404).send("Route does not exist"));
 
