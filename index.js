@@ -10,8 +10,8 @@ const app = express();
 app.use(express.json());
 
 // security
-app.use(cors());
 app.use(helmet());
+app.use(cors());
 app.use(xss());
 app.set("trust proxy", 1);
 app.use(
@@ -22,7 +22,8 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.json("connected");
+  console.log(req.body);
+  res.send("connected");
 });
 
 app.post("/sendEmail", sendEmailUsingGmail);
