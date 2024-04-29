@@ -10,20 +10,6 @@ const app = express();
 app.use(express.json());
 
 // security
-
-// const corsConfig = {
-//   origin: "https://www.ksacrashlab.com",
-// };
-
-// const corsConfig = {
-//   origin: "https://radiant-peony-76a502.netlify.app",
-// };
-
-// app.use(cors(corsConfig));
-// app.get("/", (req, res) => {
-//   res.send("connected");
-// });
-
 app.use(cors());
 app.use(helmet());
 app.use(xss());
@@ -31,7 +17,7 @@ app.set("trust proxy", 1);
 app.use(
   rateLimiter({
     windowMs: 15 * 60 * 1000,
-    max: 20,
+    max: 1000,
   })
 );
 
