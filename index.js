@@ -10,15 +10,6 @@ const app = express();
 app.use(express.json());
 
 // security
-app.use(helmet());
-app.use(xss());
-app.set("trust proxy", 1);
-app.use(
-  rateLimiter({
-    windowMs: 15 * 60 * 1000,
-    max: 20,
-  })
-);
 
 // const corsConfig = {
 //   origin: "https://www.ksacrashlab.com",
@@ -29,10 +20,23 @@ app.use(
 // };
 
 // app.use(cors(corsConfig));
+// app.get("/", (req, res) => {
+//   res.send("connected");
+// });
 
 app.use(cors());
+app.use(helmet());
+app.use(xss());
+app.set("trust proxy", 1);
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 1000,
+    max: 20,
+  })
+);
+
 app.get("/", (req, res) => {
-  res.send("connected");
+  res.json("connected");
 });
 
 app.post("/sendEmail", sendEmailUsingGmail);
